@@ -7,10 +7,36 @@
 
 module.exports = {
 
+    //Returns "New Customer"
     'new': function (req, res) {
         res.view();
+    },
+
+    //Returns "Customer Addded" message
+    created: function (req,res) {
+        res.view();
+    },
+
+    //Returns "Delete Customer" page
+    'delete': function(req,res){
+        res.view()
+    },
+
+    //Action to create new customer and return 'okay'
+    create: function(req, res, next) {
+        Customer.create( req.allParams(), function customerCreated(err, customer) {
+            if(err) return next(err);
+
+            res.redirect('customer/created')
+        });
+    },
+    
+    //Action to create new customer and return 'okay'
+    destroy: function(req, res, next) {
+        Customer.destroy( req.allParams(), function customerDeleted(err, customer) {
+            if(err) return next(err);
+
+            res.redirect('customer/deleted')
+        });
     }
-
-
-};
-
+}
