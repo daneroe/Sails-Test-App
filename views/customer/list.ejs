@@ -1,0 +1,21 @@
+<h1 class="display-4"> Customers</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>State</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% _.each(customers, function(customer){ %>
+            <tr>
+                <td><%= customer.id %></td>
+                <td><%= customer.name %></td>
+                <td><%= customer.email %></td>
+                <td><%= customer.state %></td>
+            </tr>
+     <% }) %>
+    </tbody>
+</table>

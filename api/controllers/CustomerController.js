@@ -13,13 +13,24 @@ module.exports = {
     },
 
     //Returns "Customer Addded" message
-    created: function (req,res) {
+    created: function (req, res) {
         res.view();
     },
 
     //Returns "Delete Customer" page
-    'delete': function(req,res){
+    'delete': function(req, res){
         res.view()
+    },
+    
+    //Searches Customer model and returns as an array of 'customers'
+    list: function (req, res, next){
+        Customer.find(function foundCustomers(err, customers){
+            if(err) return next(err);
+
+        res.view({ 
+            customers: customers 
+            });
+        });
     },
 
     //Action to create new customer and return 'okay'
@@ -35,7 +46,6 @@ module.exports = {
     destroy: function(req, res, next) {
         Customer.destroy( req.allParams(), function customerDeleted(err, customer) {
             if(err) return next(err);
-
             res.redirect('customer/deleted')
         });
     }
